@@ -20,23 +20,35 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shea825.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://shea825.github.io/index.html">
+<meta name="description" content="#学习报告##问题  情景送客到机场的出租车如果前往到达区排队等待载客返回市区，出租车必须到指定的“蓄车池”排队等候，依“先来后到”排队进场载客，等待时间长短取决于排队出租车和乘客数量的多少。  问题内容某机场“乘车区”现有两条并行车道，管理部门应如何设置“上车点”，并合理安排出租车和乘客，在保证车辆和乘客安全的条件下，使得总的乘车效率最高。##怎么用多智能体的模型进行动态编程？  首先要&#x3D;&#x3D;了解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAMA入门小结">
+<meta property="og:url" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#学习报告##问题  情景送客到机场的出租车如果前往到达区排队等待载客返回市区，出租车必须到指定的“蓄车池”排队等候，依“先来后到”排队进场载客，等待时间长短取决于排队出租车和乘客数量的多少。  问题内容某机场“乘车区”现有两条并行车道，管理部门应如何设置“上车点”，并合理安排出租车和乘客，在保证车辆和乘客安全的条件下，使得总的乘车效率最高。##怎么用多智能体的模型进行动态编程？  首先要&#x3D;&#x3D;了解">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/process.gif">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/taxipassenger_model_display_1.png">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/taxipassenger_model_display_2.png">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/taxipassenger_model_display_3.png">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/process2.gif">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/twolines_model_display_1.png">
+<meta property="og:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/twolines_model_display_2.png">
+<meta property="article:published_time" content="2021-08-26T12:21:51.000Z">
+<meta property="article:modified_time" content="2021-08-26T13:14:56.622Z">
 <meta property="article:author" content="Shea Hench">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/process.gif">
 
 
-<link rel="canonical" href="https://shea825.github.io/">
+<link rel="canonical" href="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/","path":"2021/08/26/GAMA入门小结/","title":"GAMA入门小结"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo</title>
+<title>GAMA入门小结 | Hexo</title>
   
 
 
@@ -146,16 +158,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -168,9 +181,9 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">GAMA入门小结</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          GAMA入门小结
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -194,7 +207,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>#学习报告<br>##问题</p>
+        <p>#学习报告<br>##问题</p>
 <ul>
 <li><p>情景<br>送客到机场的出租车如果前往到达区排队等待载客返回市区，出租车必须到指定的“蓄车池”排队等候，依“先来后到”排队进场载客，等待时间长短取决于排队出租车和乘客数量的多少。</p>
 </li>
@@ -251,7 +264,6 @@
 </ul>
 <p>我们可以发现在该假设情况下，将一条道路用于接客比把两条道都用于接客效率更高</p>
 
-      
     </div>
 
     
@@ -259,88 +271,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/26/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/08/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shea Hench">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-08-26 16:27:25 / Modified: 18:18:26" itemprop="dateCreated datePublished" datetime="2021-08-26T16:27:25+08:00">2021-08-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
