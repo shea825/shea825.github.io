@@ -200,7 +200,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-10-07 16:00:53 / Modified: 16:57:06" itemprop="dateCreated datePublished" datetime="2021-10-07T16:00:53+08:00">2021-10-07</time>
+      <time title="Created: 2021-10-07 16:00:53 / Modified: 17:14:17" itemprop="dateCreated datePublished" datetime="2021-10-07T16:00:53+08:00">2021-10-07</time>
     </span>
 
   
@@ -213,12 +213,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="实现一个简单的矩阵类"><a title="实现一个简单的矩阵类" class="headerlink" href="#实现一个简单的矩阵类"></a>实现一个简单的矩阵类</h1><ul>
-<li><code>Matrix.h</code></li>
-<li><code>main.cpp</code></li>
-<li><code>Run</code></li>
-</ul>
-
+          <h1 id="实现一个简单的矩阵类"><a class="header-anchor" href="#实现一个简单的矩阵类">¶</a> 实现一个简单的矩阵类</h1>
+<h2 id="Matrix.h"><a class="header-anchor" href="#Matrix.h">¶</a> <code>Matrix.h</code></h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> TEST_MATRIX_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST_MATRIX_H</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Matrix</span>( <span class="keyword">int</span> = defaultRowSize, <span class="keyword">int</span> = defaultColumnSize );<span class="comment">//default constructor</span></span><br><span class="line">    <span class="built_in">Matrix</span>(<span class="keyword">int</span>,<span class="keyword">int</span>,<span class="keyword">int</span> *);<span class="comment">//constructor</span></span><br><span class="line">    <span class="built_in">Matrix</span>(<span class="keyword">const</span> Matrix &amp;);</span><br><span class="line">    ~<span class="built_in">Matrix</span>();<span class="comment">//destructor</span></span><br><span class="line"></span><br><span class="line">    Matrix &amp;<span class="keyword">operator</span>=(<span class="keyword">const</span> Matrix &amp;);</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> Matrix &amp;) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> Matrix &amp;) <span class="keyword">const</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> &amp;<span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRowSize</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getColumnSize</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> std::ostream &amp;<span class="keyword">operator</span>&lt;&lt;(std::ostream &amp;,<span class="keyword">const</span> Matrix &amp;);</span><br><span class="line">    <span class="keyword">friend</span> std::istream &amp;<span class="keyword">operator</span>&gt;&gt;(std::istream &amp;,Matrix &amp;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> **im;</span><br><span class="line">    <span class="keyword">int</span> rows;</span><br><span class="line">    <span class="keyword">int</span> cols;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> defaultRowSize = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> defaultColumnSize = <span class="number">5</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initMatrix</span><span class="params">(<span class="keyword">int</span> *)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initMatrix</span><span class="params">(<span class="keyword">int</span> **)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initData</span><span class="params">(<span class="keyword">int</span> r,<span class="keyword">int</span> c)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//TEST_MATRIX_H</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="main.cpp"><a class="header-anchor" href="#main.cpp">¶</a> <code>main.cpp</code></h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;matrix.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">Matrix::<span class="built_in">Matrix</span>(<span class="keyword">int</span> r,<span class="keyword">int</span> c) &#123;</span><br><span class="line">    <span class="built_in">initData</span>(r,c);</span><br><span class="line">    <span class="built_in">initMatrix</span>(<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span> *&gt;(<span class="number">0</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Matrix::<span class="built_in">Matrix</span>(<span class="keyword">int</span> r, <span class="keyword">int</span> c, <span class="keyword">int</span> *array) &#123;</span><br><span class="line">    <span class="built_in">initData</span>(r,c);</span><br><span class="line">    <span class="built_in">initMatrix</span>(array);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Matrix::<span class="built_in">Matrix</span>(<span class="keyword">const</span> Matrix &amp;rhs) &#123;</span><br><span class="line">    <span class="built_in">initData</span>(rhs.rows,rhs.cols);</span><br><span class="line">    <span class="built_in">initMatrix</span>(rhs.im);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Matrix::initMatrix</span><span class="params">(<span class="keyword">int</span> *array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array) &#123;</span><br><span class="line">                im[i][j] = *array++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                im[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Matrix::initMatrix</span><span class="params">(<span class="keyword">int</span> **matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; ++j) &#123;</span><br><span class="line">            im[i][j] = matrix[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Matrix::initData</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    rows = r;</span><br><span class="line">    cols = c;</span><br><span class="line">    im = <span class="keyword">new</span> <span class="keyword">int</span> *[rows];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; ++i) &#123;</span><br><span class="line">        im[i] = <span class="keyword">new</span> <span class="keyword">int</span>[cols];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Matrix::~<span class="built_in">Matrix</span>() &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">delete</span> [] im[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> [] im;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Matrix &amp;Matrix::<span class="keyword">operator</span>=(<span class="keyword">const</span> Matrix &amp;rhs) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;rhs) &#123;</span><br><span class="line">        <span class="keyword">if</span> (rows != rhs.rows || cols != rhs.cols) &#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;~<span class="built_in">Matrix</span>();</span><br><span class="line">            Matrix::<span class="built_in">initData</span>(rhs.rows,rhs.cols);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">initMatrix</span>(rhs.im);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> &amp;<span class="title">Matrix::operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">assert</span>(r &gt;= <span class="number">0</span> &amp;&amp; r &lt; rows &amp;&amp; c &gt;= <span class="number">0</span> &amp;&amp; c &lt; cols);</span><br><span class="line">    <span class="keyword">return</span> im[r][c];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> Matrix::<span class="keyword">operator</span>==(<span class="keyword">const</span> Matrix &amp;rhs) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;rhs) &#123;</span><br><span class="line">        <span class="keyword">if</span> (rows != rhs.rows || cols != rhs.cols)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rhs.rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; rhs.cols; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (im[i][j] != rhs.im[i][j])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> Matrix::<span class="keyword">operator</span>!=(<span class="keyword">const</span> Matrix &amp;rhs) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (*<span class="keyword">this</span> == rhs)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Matrix::getColumnSize</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> cols;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Matrix::getRowSize</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> rows;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::ostream &amp;<span class="keyword">operator</span>&lt;&lt;(std::ostream &amp;out,<span class="keyword">const</span> Matrix &amp;rhs) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rhs.rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; rhs.cols<span class="number">-1</span>; ++j) &#123;</span><br><span class="line">            out &lt;&lt; std::<span class="built_in">setiosflags</span>(std::ios::left) &lt;&lt; std::<span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; rhs.im[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        out &lt;&lt; std::<span class="built_in">setiosflags</span>(std::ios::left) &lt;&lt; std::<span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; rhs.im[i][rhs.cols<span class="number">-1</span>] &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::istream &amp;<span class="keyword">operator</span>&gt;&gt;(std::istream &amp;in, Matrix &amp;rhs) &#123;</span><br><span class="line">    <span class="keyword">int</span> elem;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rhs.rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; rhs.cols; ++j) &#123;</span><br><span class="line">            in &gt;&gt; elem;</span><br><span class="line">            rhs.im[i][j] = elem;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Matrix m,<span class="built_in">s</span>(<span class="number">6</span>,<span class="number">6</span>);</span><br><span class="line">    std::cin &gt;&gt; m;</span><br><span class="line">    std::cout &lt;&lt; m;</span><br><span class="line">    std::cout &lt;&lt; s.<span class="built_in">getColumnSize</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; s.<span class="built_in">getRowSize</span>() &lt;&lt; std::endl;</span><br><span class="line">    s = m;</span><br><span class="line">    std::cout &lt;&lt; s.<span class="built_in">getColumnSize</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; s.<span class="built_in">getRowSize</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; (s==m);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Run"><a class="header-anchor" href="#Run">¶</a> <code>Run</code></h2>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span><span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="symbol">213 </span><span class="number">3213</span> <span class="number">3245</span> <span class="number">4564</span> <span class="number">56756</span></span><br><span class="line"><span class="symbol">456 </span><span class="number">65467</span> <span class="number">67</span> <span class="number">766</span> <span class="number">7686</span></span><br><span class="line"><span class="symbol">666 </span><span class="number">888</span> <span class="number">988</span> <span class="number">980</span> <span class="number">7789</span></span><br><span class="line"><span class="symbol">567 </span><span class="number">78</span> <span class="number">89</span> <span class="number">90</span> <span class="number">78</span> <span class="number">7</span></span><br><span class="line"><span class="symbol">1 </span>   <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span>    <span class="number">5</span>    </span><br><span class="line"><span class="symbol">213 </span> <span class="number">3213</span> <span class="number">3245</span> <span class="number">4564</span> <span class="number">56756</span></span><br><span class="line"><span class="symbol">456 </span> <span class="number">6546767</span>   <span class="number">766</span>  <span class="number">7686</span> </span><br><span class="line"><span class="symbol">666 </span> <span class="number">888</span>  <span class="number">988</span>  <span class="number">980</span>  <span class="number">7789</span> </span><br><span class="line"><span class="symbol">567 </span> <span class="number">78</span>   <span class="number">89</span>   <span class="number">90</span>   <span class="number">78</span>   </span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
       
     </div>
 
@@ -269,7 +271,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-10-07 13:08:01 / Modified: 16:56:59" itemprop="dateCreated datePublished" datetime="2021-10-07T13:08:01+08:00">2021-10-07</time>
+      <time title="Created: 2021-10-07 13:08:01 / Modified: 17:19:56" itemprop="dateCreated datePublished" datetime="2021-10-07T13:08:01+08:00">2021-10-07</time>
     </span>
 
   
@@ -282,11 +284,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="CLLogger-类"><a title="CLLogger 类" class="headerlink" href="#CLLogger-类"></a><code>CLLogger</code> 类</h1><h2 id="类的声明"><a title="类的声明" class="headerlink" href="#类的声明"></a>类的声明</h2>
-
-<h2 id="类的实现"><a title="类的实现" class="headerlink" href="#类的实现"></a>类的实现</h2>
-
-
+          <h1 id="CLLogger 类"><a class="header-anchor" href="#CLLogger 类">¶</a> <code>CLLogger</code> 类</h1>
+<h2 id="类的声明"><a class="header-anchor" href="#类的声明">¶</a> 类的声明</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CLLogger_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLLogger_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CLStatus.h&quot;</span></span></span><br><span class="line"><span class="comment">//用于向文件LOG_FILE_NAME中，记录日志信息</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLLogger</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CLLogger</span>();<span class="comment">//构造函数</span></span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">CLLogger</span>();<span class="comment">//虚析构函数</span></span><br><span class="line">    <span class="function">CLStatus <span class="title">WriteLog</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pstrMsg,<span class="keyword">long</span> lErrorCode)</span></span>;<span class="comment">//向文件写入日志信息，参数分别是文字信息说明和出错码</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">CLLogger</span>(<span class="keyword">const</span> CLLoger&amp;);</span><br><span class="line">    CLLogger&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> CLLogger&amp;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="类的实现"><a class="header-anchor" href="#类的实现">¶</a> 类的实现</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CLLogger.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_FILE_NAME <span class="meta-string">&quot;CLLogger.txt&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_SIZE 265</span></span><br><span class="line"></span><br><span class="line">CLLogger::<span class="built_in">CLLogger</span>()&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CLLogger::~<span class="built_in">CLLogger</span>()&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">CLStatus <span class="title">CLLogger::WriteLog</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pstrMsg, <span class="keyword">long</span> lErrorCode)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pstrMsg == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">strlen</span>(pstrMsg) == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> fd = <span class="built_in">open</span>(LOG_FILE_NAME, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);<span class="comment">//该文件可读可写，每次写的数据放文件末尾，若文件不存在则按pathname创建文件，文件所有者可读可写</span></span><br><span class="line">	<span class="keyword">if</span>(fd == <span class="number">-1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">-1</span>, errno);</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">ssize_t</span> r = <span class="built_in">write</span>(fd, pstrMsg, <span class="built_in">strlen</span>(pstrMsg));</span><br><span class="line">	<span class="keyword">if</span>(r == <span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="built_in">close</span>(fd);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">-1</span>, errno);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> buf[MAX_SIZE];</span><br><span class="line">	<span class="built_in">snprintf</span>(buf, MAX_SIZE, <span class="string">&quot;Error code: %ld\r\n&quot;</span>,  lErrorCode);<span class="comment">//按指定格式存储字符串到buf</span></span><br><span class="line"></span><br><span class="line">	r = <span class="built_in">write</span>(fd, buf, <span class="built_in">strlen</span>(buf));</span><br><span class="line">	<span class="keyword">if</span>(r == <span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="built_in">close</span>(fd);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">-1</span>, errno);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">close</span>(fd);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">CLStatus</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
       
     </div>
 
@@ -343,7 +346,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-06 22:48:23" itemprop="dateModified" datetime="2021-10-06T22:48:23+08:00">2021-10-06</time>
+        <time title="Modified: 2021-10-07 17:20:13" itemprop="dateModified" datetime="2021-10-07T17:20:13+08:00">2021-10-07</time>
       </span>
 
   
@@ -357,17 +360,29 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>Linux的程序库规定，每个函数都返回一个对象，包含了返回值和出错码，这个对象的类型是类<code>CLStatus</code>。</p>
-<h1 id="CLStatus-类"><a title="CLStatus 类" class="headerlink" href="#CLStatus-类"></a><code>CLStatus</code> 类</h1><h2 id="类的声明-CLStatus-h"><a title="类的声明 CLStatus.h" class="headerlink" href="#类的声明-CLStatus-h"></a>类的声明 <code>CLStatus.h</code></h2>
-<h2 id="类的实现"><a title="类的实现" class="headerlink" href="#类的实现"></a>类的实现</h2>
-<h1 id="CLStatus-类的改进"><a title="CLStatus 类的改进" class="headerlink" href="#CLStatus-类的改进"></a><code>CLStatus</code> 类的改进</h1><h2 id="新的设计"><a title="新的设计" class="headerlink" href="#新的设计"></a>新的设计</h2><ul>
-<li>设计一种数据成员：在类的内部可以读和写，但在类的外部只能读不能写<h2 id="类的声明-CLStatus-h-1"><a title="类的声明 CLStatus.h" class="headerlink" href="#类的声明-CLStatus-h-1"></a>类的声明 <code>CLStatus.h</code></h2>
-<h2 id="类的实现-1"><a title="类的实现" class="headerlink" href="#类的实现-1"></a>类的实现</h2>
-<h1 id="使用类的注意事项"><a title="使用类的注意事项" class="headerlink" href="#使用类的注意事项"></a>使用类的注意事项</h1></li>
-<li>综合Linux和Win，使用<code>CLStatus</code>类时建议按照如下方式编写代码
-上述方式只产生1个对象。而
-在VS中会产生3个对象，在g++会产生2个对象</li>
+<h1 id="CLStatus 类"><a class="header-anchor" href="#CLStatus 类">¶</a> <code>CLStatus</code> 类</h1>
+<h2 id="类的声明"><a class="header-anchor" href="#类的声明">¶</a> 类的声明</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLStatus</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line">    <span class="built_in">CLStatus</span>(<span class="keyword">long</span> lReturnCode,<span class="keyword">long</span> lErrorCode);<span class="comment">//lReturnCode&gt;=0表示成功</span></span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">CLStatus</span>();</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">IsSucess</span><span class="params">()</span></span>;<span class="comment">//判断m_lReturnCode&gt;=0</span></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">GetErrorCode</span><span class="params">()</span></span>;<span class="comment">//返回m_lErrorCode</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">long</span> m_lReturnCode;<span class="comment">//返回值</span></span><br><span class="line">    <span class="keyword">long</span> m_lErrorCode;<span class="comment">//出错码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类的实现"><a class="header-anchor" href="#类的实现">¶</a> 类的实现</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造函数</span></span><br><span class="line">CLStatus::<span class="built_in">CLStatus</span>(<span class="keyword">long</span> lReturnCode,<span class="keyword">long</span> lErrorCode)&#123;</span><br><span class="line">    m_lReturnCode = lReturnCOde;</span><br><span class="line">    m_lErrorCode = lErrorCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//析构函数</span></span><br><span class="line">CLStatus::~<span class="built_in">CLStatus</span>()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">CLStatus::IsSucess</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m_lReturnCode &gt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">CLStatus::GetErrorCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m_lErrorCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="CLStatus 类的改进"><a class="header-anchor" href="#CLStatus 类的改进">¶</a> <code>CLStatus</code> 类的改进</h1>
+<h2 id="新的设计"><a class="header-anchor" href="#新的设计">¶</a> 新的设计</h2>
+<ul>
+<li>设计一种数据成员：在类的内部可以读和写，但在类的外部只能读不能写</li>
 </ul>
-
+<h2 id="类的声明-2"><a class="header-anchor" href="#类的声明-2">¶</a> 类的声明</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLStatus</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line">    <span class="built_in">CLStatus</span>(<span class="keyword">long</span> lReturnCode,<span class="keyword">long</span> lErrorCode);<span class="comment">//构造函数</span></span><br><span class="line">    <span class="built_in">CLStatus</span>(<span class="keyword">const</span> CLStatus&amp; s);<span class="comment">//拷贝构造函数</span></span><br><span class="line">    <span class="comment">//lReturnCode&gt;=0表示成功</span></span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">CLStatus</span>();<span class="comment">//虚析构函数</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">IsSucess</span><span class="params">()</span></span>;<span class="comment">//判断m_lReturnCode&gt;=0</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">long</span>&amp; m_clReturnCode;<span class="comment">//返回值的静态引用，可读不可写</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">long</span>&amp; m_clErrorCode;<span class="comment">//出错码的引用</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">long</span> m_lReturnCode;<span class="comment">//返回值</span></span><br><span class="line">    <span class="keyword">long</span> m_lErrorCode;<span class="comment">//出错码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类的实现-2"><a class="header-anchor" href="#类的实现-2">¶</a> 类的实现</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CLStatus::<span class="built_in">CLStatus</span>(<span class="keyword">long</span> lReturnCode,<span class="keyword">long</span> lErrorCode):<span class="built_in">m_clReturnCode</span>(m_lReturnCode),<span class="built_in">m_clErrorCode</span>(m_lErrorCode)&#123;</span><br><span class="line">    m_lReturnCode = lReturnCode;</span><br><span class="line">    m_lErrorCode = lErrorCode;</span><br><span class="line">&#125;</span><br><span class="line">CLStatus::<span class="built_in">CLStatus</span>(<span class="keyword">const</span> CLStatus&amp; s):<span class="built_in">m_clReturnCode</span>(m_lReturnCode),<span class="built_in">m_clErrorCode</span>(m_lErrorCode)&#123;</span><br><span class="line">    m_lReturnCode = s.m_lReturnCode;</span><br><span class="line">    m_lErrorCode = s.m_lErrorCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">CLStatus::IsSuccess</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m_clReturn &gt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用类的注意事项"><a class="header-anchor" href="#使用类的注意事项">¶</a> 使用类的注意事项</h1>
+<ul>
+<li>综合Linux和Win，使用<code>CLStatus</code>类时建议按照如下方式编写代码</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CLStatus <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CLStatus</span>(...);</span><br><span class="line">&#125;</span><br><span class="line">CLStatus s = <span class="built_in">f</span>();</span><br></pre></td></tr></table></figure>
+<p>上述方式只产生1个对象。而</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CLStatus <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    CLStatus temp;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line">CLStatus temp;</span><br><span class="line">temp = <span class="built_in">f</span>();</span><br></pre></td></tr></table></figure>
+<p>在VS中会产生3个对象，在g++会产生2个对象</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
       
     </div>
 
@@ -424,7 +439,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-07 17:00:14" itemprop="dateModified" datetime="2021-10-07T17:00:14+08:00">2021-10-07</time>
+        <time title="Modified: 2021-10-07 17:14:15" itemprop="dateModified" datetime="2021-10-07T17:14:15+08:00">2021-10-07</time>
       </span>
 
   
@@ -437,36 +452,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="文件的基本操作"><a title="文件的基本操作" class="headerlink" href="#文件的基本操作"></a>文件的基本操作</h1><h2 id="open函数"><a title="open函数" class="headerlink" href="#open函数"></a><code>open</code>函数</h2>
+          <h1 id="文件的基本操作"><a class="header-anchor" href="#文件的基本操作">¶</a> 文件的基本操作</h1>
+<h2 id="open函数"><a class="header-anchor" href="#open函数">¶</a> <code>open</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> fd = <span class="built_in">open</span>(<span class="keyword">const</span> <span class="keyword">char</span> *pathname,<span class="keyword">int</span> flags,...);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>flags</code>取值 (可用<code>|</code>组合)<ul>
-<li>文件打开模式<ul>
+<li><code>flags</code>取值 (可用<code>|</code>组合)
+<ul>
+<li>文件打开模式
+<ul>
 <li><code>O_RDONLY</code> = 0</li>
 <li><code>O_WRONLY</code> = 1</li>
 <li><code>O_RDWR</code> = 2</li>
 </ul>
 </li>
-<li>非文件打开模式<ul>
+<li>非文件打开模式
+<ul>
 <li><code>O_APPEND</code> 每次<strong>写</strong>的数据放在文件尾部</li>
-<li><code>O_CREART</code> </li>
+<li><code>O_CREART</code></li>
 <li><code>O_EXCL</code> 配合<code>O_CREART</code>来创建文件，否则出错</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>第三个参数取值<br>  多用户访问权限取值</li>
-<li><code>fd</code>取值<ul>
+<li>第三个参数取值<br>
+多用户访问权限取值</li>
+<li><code>fd</code>取值
+<ul>
 <li>文件存在时返回文件描述符</li>
-<li>通常Linux的API函数出错返回<code>-1</code><ul>
+<li>通常Linux的API函数出错返回<code>-1</code>
+<ul>
 <li>出错处理</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="lseek函数"><a title="lseek函数" class="headerlink" href="#lseek函数"></a><code>lseek</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = <span class="built_in">open</span>(<span class="string">&quot;a.txt&quot;</span>,O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">-1</span> = fd)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;open error&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;errno is&quot;</span> &lt;&lt; errno &lt;&lt; endl;<span class="comment">//说明API函数调用失败的出错原因</span></span><br><span class="line">        cout &lt;&lt; <span class="built_in">strerror</span>(errno) &lt;&lt; endl;<span class="comment">//出错码对应的字符串信息</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lseek函数"><a class="header-anchor" href="#lseek函数">¶</a> <code>lseek</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">off_t</span> f_offset = <span class="built_in">lseek</span>(<span class="keyword">int</span> fd,<span class="keyword">off_t</span> offset,<span class="keyword">int</span> whence);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>offset</code>参数<ul>
+<li><code>offset</code>参数
+<ul>
 <li>相对偏移量</li>
 <li>有符号数类型</li>
 </ul>
@@ -475,46 +501,50 @@
 <table>
 <thead>
 <tr>
-<th align="center">类型</th>
-<th align="center">32位平台</th>
-<th align="center">64位平台</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">32位平台</th>
+<th style="text-align:center">64位平台</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">char</td>
-<td align="center">1个字节8位</td>
-<td align="center">1个字节</td>
+<tbody>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">1个字节8位</td>
+<td style="text-align:center">1个字节</td>
 </tr>
 <tr>
-<td align="center">short</td>
-<td align="center">2个字节16位</td>
-<td align="center">2个字节</td>
+<td style="text-align:center">short</td>
+<td style="text-align:center">2个字节16位</td>
+<td style="text-align:center">2个字节</td>
 </tr>
 <tr>
-<td align="center">int</td>
-<td align="center">4个字节32位</td>
-<td align="center">4个字节</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4个字节32位</td>
+<td style="text-align:center">4个字节</td>
 </tr>
 <tr>
-<td align="center">long</td>
-<td align="center">4个字节</td>
-<td align="center">8个字节（区别）</td>
+<td style="text-align:center">long</td>
+<td style="text-align:center">4个字节</td>
+<td style="text-align:center">8个字节（区别）</td>
 </tr>
 <tr>
-<td align="center">long long</td>
-<td align="center">8个字节</td>
-<td align="center">8个字节</td>
+<td style="text-align:center">long long</td>
+<td style="text-align:center">8个字节</td>
+<td style="text-align:center">8个字节</td>
 </tr>
 <tr>
-<td align="center">point</td>
-<td align="center">4个字节</td>
-<td align="center">8个字节（区别）</td>
+<td style="text-align:center">point</td>
+<td style="text-align:center">4个字节</td>
+<td style="text-align:center">8个字节（区别）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><code>whence</code>参数<ul>
+<li><code>whence</code>参数
+<ul>
 <li>和<code>offset</code>配合使用</li>
-<li><code>whence</code>取值<ul>
+<li><code>whence</code>取值
+<ul>
 <li><code>SEEK_SET</code> 偏移量 = <code>offset</code></li>
 <li><code>SEEK_CUR</code> 偏移量 = 当前文件偏移量 + <code>offset</code></li>
 <li><code>SEEK_END</code> 偏移量 = 文件长度 + <code>offset</code></li>
@@ -522,46 +552,55 @@
 </li>
 </ul>
 </li>
-<li><code>f_offset</code>取值<ul>
+<li><code>f_offset</code>取值
+<ul>
 <li>函数调用成功返回<strong>文件偏移量</strong></li>
 <li>失败返回<code>-1</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="read和write函数"><a title="read和write函数" class="headerlink" href="#read和write函数"></a><code>read</code>和<code>write</code>函数</h2>
+<h2 id="read和write函数"><a class="header-anchor" href="#read和write函数">¶</a> <code>read</code>和<code>write</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">ssize_t</span> rd_bytes = <span class="built_in">read</span>(<span class="keyword">int</span> fd,<span class="keyword">void</span> *buf,<span class="keyword">size_t</span> count);</span><br><span class="line"><span class="keyword">ssize_t</span> wr_bytes = <span class="built_in">write</span>(<span class="keyword">int</span> fd,<span class="keyword">const</span> <span class="keyword">void</span> *buf,<span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>buf</code>参数<ul>
+<li><code>buf</code>参数
+<ul>
 <li>指向用于保存所读出数据的缓存</li>
 <li><code>write</code>函数不会对<code>buf</code>所指向的内存有任何改动，因此加上<code>const</code></li>
 </ul>
 </li>
-<li><code>count</code>参数<ul>
+<li><code>count</code>参数
+<ul>
 <li>指示了需要从文件读或写出多少字节</li>
 </ul>
 </li>
-<li><code>rd_bytes</code>取值<ul>
+<li><code>rd_bytes</code>取值
+<ul>
 <li><code>rd_bytes</code> = 0 代表已读到文件末尾</li>
 </ul>
 </li>
-<li>关于<code>write</code>的两个问题<ul>
+<li>关于<code>write</code>的两个问题
+<ul>
 <li>在文件中间某处写入数据是覆盖该处的数据</li>
 <li>当以<code>O_APPEND</code>标志打开文件时，可以使用<code>lseek</code>修改文件偏移量，但每次写都会把数据写到文件末尾</li>
 </ul>
 </li>
 </ul>
-<h2 id="close函数"><a title="close函数" class="headerlink" href="#close函数"></a><code>close</code>函数</h2>
+<h2 id="close函数"><a class="header-anchor" href="#close函数">¶</a> <code>close</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> cl_tag = <span class="built_in">close</span>(<span class="keyword">int</span> fd);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>cl_tag</code>取值<ul>
+<li><code>cl_tag</code>取值
+<ul>
 <li><code>cl_tag</code> = 0 函数调用成功</li>
 </ul>
 </li>
-<li>是否存在内存泄漏？<ul>
+<li>是否存在内存泄漏？
+<ul>
 <li>定义 分配了内存，想释放却没办法</li>
 <li><code>open</code>打开或创建一个文件后，若未<code>close</code>，其<code>fd</code>还存在，随时可调用<code>close</code>关闭，不存在内存泄漏</li>
 </ul>
 </li>
 </ul>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
       
     </div>
 

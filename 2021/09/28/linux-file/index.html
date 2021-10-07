@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shea825.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="文件的基本操作open函数  flags取值 (可用|组合) 文件打开模式 O_RDONLY &#x3D; 0 O_WRONLY &#x3D; 1 O_RDWR &#x3D; 2   非文件打开模式 O_APPEND 每次写的数据放在文件尾部 O_CREART  O_EXCL 配合O_CREART来创建文件，否则出错     第三个参数取值  多用户访问权限取值 fd取值 文件存在时返回文件描述符 通常Linux的API函数出">
+<meta name="description" content="¶ 文件的基本操作 ¶ open函数 12#include &lt;fcntl.h&gt;int fd &#x3D; open(const char *pathname,int flags,...);  flags取值 (可用|组合)  文件打开模式  O_RDONLY &#x3D; 0 O_WRONLY &#x3D; 1 O_RDWR &#x3D; 2   非文件打开模式  O_APPEND 每次写的数据放在文件尾部 O_CREART">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux file">
 <meta property="og:url" content="https://shea825.github.io/2021/09/28/linux-file/index.html">
 <meta property="og:site_name" content="Shea&#39;s Blog">
-<meta property="og:description" content="文件的基本操作open函数  flags取值 (可用|组合) 文件打开模式 O_RDONLY &#x3D; 0 O_WRONLY &#x3D; 1 O_RDWR &#x3D; 2   非文件打开模式 O_APPEND 每次写的数据放在文件尾部 O_CREART  O_EXCL 配合O_CREART来创建文件，否则出错     第三个参数取值  多用户访问权限取值 fd取值 文件存在时返回文件描述符 通常Linux的API函数出">
+<meta property="og:description" content="¶ 文件的基本操作 ¶ open函数 12#include &lt;fcntl.h&gt;int fd &#x3D; open(const char *pathname,int flags,...);  flags取值 (可用|组合)  文件打开模式  O_RDONLY &#x3D; 0 O_WRONLY &#x3D; 1 O_RDWR &#x3D; 2   非文件打开模式  O_APPEND 每次写的数据放在文件尾部 O_CREART">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-28T09:10:41.000Z">
-<meta property="article:modified_time" content="2021-10-07T09:00:14.193Z">
+<meta property="article:modified_time" content="2021-10-07T09:14:15.519Z">
 <meta property="article:author" content="Shea Hench">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="API">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">文件的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#open%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">open函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lseek%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">lseek函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read%E5%92%8Cwrite%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">read和write函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">close函数</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text"> 文件的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#open%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text"> open函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lseek%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text"> lseek函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read%E5%92%8Cwrite%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text"> read和write函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text"> close函数</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,7 +212,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-07 17:00:14" itemprop="dateModified" datetime="2021-10-07T17:00:14+08:00">2021-10-07</time>
+        <time title="Modified: 2021-10-07 17:14:15" itemprop="dateModified" datetime="2021-10-07T17:14:15+08:00">2021-10-07</time>
       </span>
 
   
@@ -225,36 +225,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="文件的基本操作"><a title="文件的基本操作" class="headerlink" href="#文件的基本操作"></a>文件的基本操作</h1><h2 id="open函数"><a title="open函数" class="headerlink" href="#open函数"></a><code>open</code>函数</h2>
+        <h1 id="文件的基本操作"><a class="header-anchor" href="#文件的基本操作">¶</a> 文件的基本操作</h1>
+<h2 id="open函数"><a class="header-anchor" href="#open函数">¶</a> <code>open</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> fd = <span class="built_in">open</span>(<span class="keyword">const</span> <span class="keyword">char</span> *pathname,<span class="keyword">int</span> flags,...);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>flags</code>取值 (可用<code>|</code>组合)<ul>
-<li>文件打开模式<ul>
+<li><code>flags</code>取值 (可用<code>|</code>组合)
+<ul>
+<li>文件打开模式
+<ul>
 <li><code>O_RDONLY</code> = 0</li>
 <li><code>O_WRONLY</code> = 1</li>
 <li><code>O_RDWR</code> = 2</li>
 </ul>
 </li>
-<li>非文件打开模式<ul>
+<li>非文件打开模式
+<ul>
 <li><code>O_APPEND</code> 每次<strong>写</strong>的数据放在文件尾部</li>
-<li><code>O_CREART</code> </li>
+<li><code>O_CREART</code></li>
 <li><code>O_EXCL</code> 配合<code>O_CREART</code>来创建文件，否则出错</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>第三个参数取值<br>  多用户访问权限取值</li>
-<li><code>fd</code>取值<ul>
+<li>第三个参数取值<br>
+多用户访问权限取值</li>
+<li><code>fd</code>取值
+<ul>
 <li>文件存在时返回文件描述符</li>
-<li>通常Linux的API函数出错返回<code>-1</code><ul>
+<li>通常Linux的API函数出错返回<code>-1</code>
+<ul>
 <li>出错处理</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="lseek函数"><a title="lseek函数" class="headerlink" href="#lseek函数"></a><code>lseek</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = <span class="built_in">open</span>(<span class="string">&quot;a.txt&quot;</span>,O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">-1</span> = fd)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;open error&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;errno is&quot;</span> &lt;&lt; errno &lt;&lt; endl;<span class="comment">//说明API函数调用失败的出错原因</span></span><br><span class="line">        cout &lt;&lt; <span class="built_in">strerror</span>(errno) &lt;&lt; endl;<span class="comment">//出错码对应的字符串信息</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lseek函数"><a class="header-anchor" href="#lseek函数">¶</a> <code>lseek</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">off_t</span> f_offset = <span class="built_in">lseek</span>(<span class="keyword">int</span> fd,<span class="keyword">off_t</span> offset,<span class="keyword">int</span> whence);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>offset</code>参数<ul>
+<li><code>offset</code>参数
+<ul>
 <li>相对偏移量</li>
 <li>有符号数类型</li>
 </ul>
@@ -263,46 +274,50 @@
 <table>
 <thead>
 <tr>
-<th align="center">类型</th>
-<th align="center">32位平台</th>
-<th align="center">64位平台</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">32位平台</th>
+<th style="text-align:center">64位平台</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">char</td>
-<td align="center">1个字节8位</td>
-<td align="center">1个字节</td>
+<tbody>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">1个字节8位</td>
+<td style="text-align:center">1个字节</td>
 </tr>
 <tr>
-<td align="center">short</td>
-<td align="center">2个字节16位</td>
-<td align="center">2个字节</td>
+<td style="text-align:center">short</td>
+<td style="text-align:center">2个字节16位</td>
+<td style="text-align:center">2个字节</td>
 </tr>
 <tr>
-<td align="center">int</td>
-<td align="center">4个字节32位</td>
-<td align="center">4个字节</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4个字节32位</td>
+<td style="text-align:center">4个字节</td>
 </tr>
 <tr>
-<td align="center">long</td>
-<td align="center">4个字节</td>
-<td align="center">8个字节（区别）</td>
+<td style="text-align:center">long</td>
+<td style="text-align:center">4个字节</td>
+<td style="text-align:center">8个字节（区别）</td>
 </tr>
 <tr>
-<td align="center">long long</td>
-<td align="center">8个字节</td>
-<td align="center">8个字节</td>
+<td style="text-align:center">long long</td>
+<td style="text-align:center">8个字节</td>
+<td style="text-align:center">8个字节</td>
 </tr>
 <tr>
-<td align="center">point</td>
-<td align="center">4个字节</td>
-<td align="center">8个字节（区别）</td>
+<td style="text-align:center">point</td>
+<td style="text-align:center">4个字节</td>
+<td style="text-align:center">8个字节（区别）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><code>whence</code>参数<ul>
+<li><code>whence</code>参数
+<ul>
 <li>和<code>offset</code>配合使用</li>
-<li><code>whence</code>取值<ul>
+<li><code>whence</code>取值
+<ul>
 <li><code>SEEK_SET</code> 偏移量 = <code>offset</code></li>
 <li><code>SEEK_CUR</code> 偏移量 = 当前文件偏移量 + <code>offset</code></li>
 <li><code>SEEK_END</code> 偏移量 = 文件长度 + <code>offset</code></li>
@@ -310,46 +325,55 @@
 </li>
 </ul>
 </li>
-<li><code>f_offset</code>取值<ul>
+<li><code>f_offset</code>取值
+<ul>
 <li>函数调用成功返回<strong>文件偏移量</strong></li>
 <li>失败返回<code>-1</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="read和write函数"><a title="read和write函数" class="headerlink" href="#read和write函数"></a><code>read</code>和<code>write</code>函数</h2>
+<h2 id="read和write函数"><a class="header-anchor" href="#read和write函数">¶</a> <code>read</code>和<code>write</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">ssize_t</span> rd_bytes = <span class="built_in">read</span>(<span class="keyword">int</span> fd,<span class="keyword">void</span> *buf,<span class="keyword">size_t</span> count);</span><br><span class="line"><span class="keyword">ssize_t</span> wr_bytes = <span class="built_in">write</span>(<span class="keyword">int</span> fd,<span class="keyword">const</span> <span class="keyword">void</span> *buf,<span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>buf</code>参数<ul>
+<li><code>buf</code>参数
+<ul>
 <li>指向用于保存所读出数据的缓存</li>
 <li><code>write</code>函数不会对<code>buf</code>所指向的内存有任何改动，因此加上<code>const</code></li>
 </ul>
 </li>
-<li><code>count</code>参数<ul>
+<li><code>count</code>参数
+<ul>
 <li>指示了需要从文件读或写出多少字节</li>
 </ul>
 </li>
-<li><code>rd_bytes</code>取值<ul>
+<li><code>rd_bytes</code>取值
+<ul>
 <li><code>rd_bytes</code> = 0 代表已读到文件末尾</li>
 </ul>
 </li>
-<li>关于<code>write</code>的两个问题<ul>
+<li>关于<code>write</code>的两个问题
+<ul>
 <li>在文件中间某处写入数据是覆盖该处的数据</li>
 <li>当以<code>O_APPEND</code>标志打开文件时，可以使用<code>lseek</code>修改文件偏移量，但每次写都会把数据写到文件末尾</li>
 </ul>
 </li>
 </ul>
-<h2 id="close函数"><a title="close函数" class="headerlink" href="#close函数"></a><code>close</code>函数</h2>
+<h2 id="close函数"><a class="header-anchor" href="#close函数">¶</a> <code>close</code>函数</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> cl_tag = <span class="built_in">close</span>(<span class="keyword">int</span> fd);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>cl_tag</code>取值<ul>
+<li><code>cl_tag</code>取值
+<ul>
 <li><code>cl_tag</code> = 0 函数调用成功</li>
 </ul>
 </li>
-<li>是否存在内存泄漏？<ul>
+<li>是否存在内存泄漏？
+<ul>
 <li>定义 分配了内存，想释放却没办法</li>
 <li><code>open</code>打开或创建一个文件后，若未<code>close</code>，其<code>fd</code>还存在，随时可调用<code>close</code>关闭，不存在内存泄漏</li>
 </ul>
 </li>
 </ul>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
