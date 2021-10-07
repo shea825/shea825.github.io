@@ -20,27 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shea825.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Hello">
+<meta name="description" content="Linux的程序库规定，每个函数都返回一个对象，包含了返回值和出错码，这个对象的类型是类CLStatus。 CLStatus 类类的声明 CLStatus.h 类的实现 CLStatus 类的改进新的设计 设计一种数据成员：在类的内部可以读和写，但在类的外部只能读不能写类的声明 CLStatus.h 类的实现 使用类的注意事项 综合Linux和Win，使用CLStatus类时建议按照如下方式编写代">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://shea825.github.io/2021/08/26/hello-world/index.html">
+<meta property="og:title" content="执行体程序库的出错处理">
+<meta property="og:url" content="https://shea825.github.io/2021/10/02/exe-lib-error/index.html">
 <meta property="og:site_name" content="Shea&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Hello">
+<meta property="og:description" content="Linux的程序库规定，每个函数都返回一个对象，包含了返回值和出错码，这个对象的类型是类CLStatus。 CLStatus 类类的声明 CLStatus.h 类的实现 CLStatus 类的改进新的设计 设计一种数据成员：在类的内部可以读和写，但在类的外部只能读不能写类的声明 CLStatus.h 类的实现 使用类的注意事项 综合Linux和Win，使用CLStatus类时建议按照如下方式编写代">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-26T08:27:25.906Z">
-<meta property="article:modified_time" content="2021-08-26T10:18:26.180Z">
+<meta property="article:published_time" content="2021-10-02T07:28:52.000Z">
+<meta property="article:modified_time" content="2021-10-06T14:48:23.911Z">
 <meta property="article:author" content="Shea Hench">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://shea825.github.io/2021/08/26/hello-world/">
+<link rel="canonical" href="https://shea825.github.io/2021/10/02/exe-lib-error/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/08/26/hello-world/","path":"2021/08/26/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/10/02/exe-lib-error/","path":"2021/10/02/exe-lib-error/","title":"执行体程序库的出错处理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Shea's Blog</title>
+<title>执行体程序库的出错处理 | Shea's Blog</title>
   
 
 
@@ -119,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hello Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">2.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">2.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">2.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">2.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">2.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CLStatus-%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">CLStatus 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%A3%B0%E6%98%8E-CLStatus-h"><span class="nav-number">1.1.</span> <span class="nav-text">类的声明 CLStatus.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">类的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CLStatus-%E7%B1%BB%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">2.</span> <span class="nav-text">CLStatus 类的改进</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">新的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%A3%B0%E6%98%8E-CLStatus-h-1"><span class="nav-number">2.2.</span> <span class="nav-text">类的声明 CLStatus.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.3.</span> <span class="nav-text">类的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%B1%BB%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">使用类的注意事项</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -179,7 +180,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/08/26/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/10/02/exe-lib-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          执行体程序库的出错处理
         </h1>
 
         <div class="post-meta-container">
@@ -202,10 +203,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-08-26 16:27:25 / Modified: 18:18:26" itemprop="dateCreated datePublished" datetime="2021-08-26T16:27:25+08:00">2021-08-26</time>
+      <time title="Created: 2021-10-02 15:28:52" itemprop="dateCreated datePublished" datetime="2021-10-02T15:28:52+08:00">2021-10-02</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-10-06 22:48:23" itemprop="dateModified" datetime="2021-10-06T22:48:23+08:00">2021-10-06</time>
+      </span>
 
   
 </div>
@@ -217,19 +224,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>Linux的程序库规定，每个函数都返回一个对象，包含了返回值和出错码，这个对象的类型是类<code>CLStatus</code>。</p>
+<h1 id="CLStatus-类"><a title="CLStatus 类" class="headerlink" href="#CLStatus-类"></a><code>CLStatus</code> 类</h1><h2 id="类的声明-CLStatus-h"><a title="类的声明 CLStatus.h" class="headerlink" href="#类的声明-CLStatus-h"></a>类的声明 <code>CLStatus.h</code></h2>
+<h2 id="类的实现"><a title="类的实现" class="headerlink" href="#类的实现"></a>类的实现</h2>
+<h1 id="CLStatus-类的改进"><a title="CLStatus 类的改进" class="headerlink" href="#CLStatus-类的改进"></a><code>CLStatus</code> 类的改进</h1><h2 id="新的设计"><a title="新的设计" class="headerlink" href="#新的设计"></a>新的设计</h2><ul>
+<li>设计一种数据成员：在类的内部可以读和写，但在类的外部只能读不能写<h2 id="类的声明-CLStatus-h-1"><a title="类的声明 CLStatus.h" class="headerlink" href="#类的声明-CLStatus-h-1"></a>类的声明 <code>CLStatus.h</code></h2>
+<h2 id="类的实现-1"><a title="类的实现" class="headerlink" href="#类的实现-1"></a>类的实现</h2>
+<h1 id="使用类的注意事项"><a title="使用类的注意事项" class="headerlink" href="#使用类的注意事项"></a>使用类的注意事项</h1></li>
+<li>综合Linux和Win，使用<code>CLStatus</code>类时建议按照如下方式编写代码
+上述方式只产生1个对象。而
+在VS中会产生3个对象，在g++会产生2个对象</li>
+</ul>
 
     </div>
 
@@ -238,15 +243,21 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/09/28/linux-file/" rel="prev" title="linux file">
+                  <i class="fa fa-chevron-left"></i> linux file
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/" rel="next" title="GAMA入门小结">
-                  GAMA入门小结 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/10/07/linux-log/" rel="next" title="linux-log">
+                  linux-log <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
