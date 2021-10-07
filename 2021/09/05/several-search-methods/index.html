@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shea825.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="¶ 无信息搜索&#x2F;盲目搜索 ¶ 广度优先搜索BFS ¶ 特点  完备的 优先找到最浅的目标节点 但最浅不一定最优 如果路径耗散是节点深度的非递减函数，BFS才是最优的 例如单步耗散相等的情况 内存的需求是比执行时间的消耗更大的问题  ¶ 代价一致搜索UCS ¶ 特点  扩展路径消耗最低的节点 扩展到一个具有能返回同一状态的零耗散行动的节点时会陷入无限循环  ¶ 深度优先搜索DFS ¶ 特点  对内存">
+<meta name="description" content="无信息搜索&#x2F;盲目搜索广度优先搜索BFS特点 完备的 优先找到最浅的目标节点 但最浅不一定最优 如果路径耗散是节点深度的非递减函数，BFS才是最优的例如单步耗散相等的情况 内存的需求是比执行时间的消耗更大的问题  代价一致搜索UCS特点 扩展路径消耗最低的节点 扩展到一个具有能返回同一状态的零耗散行动的节点时会陷入无限循环  深度优先搜索DFS特点 对内存需求很少，只存储一条从根节点到叶节点的路径，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="several_search_methods">
+<meta property="og:title" content="several search methods">
 <meta property="og:url" content="https://shea825.github.io/2021/09/05/several-search-methods/index.html">
 <meta property="og:site_name" content="Shea&#39;s Blog">
-<meta property="og:description" content="¶ 无信息搜索&#x2F;盲目搜索 ¶ 广度优先搜索BFS ¶ 特点  完备的 优先找到最浅的目标节点 但最浅不一定最优 如果路径耗散是节点深度的非递减函数，BFS才是最优的 例如单步耗散相等的情况 内存的需求是比执行时间的消耗更大的问题  ¶ 代价一致搜索UCS ¶ 特点  扩展路径消耗最低的节点 扩展到一个具有能返回同一状态的零耗散行动的节点时会陷入无限循环  ¶ 深度优先搜索DFS ¶ 特点  对内存">
+<meta property="og:description" content="无信息搜索&#x2F;盲目搜索广度优先搜索BFS特点 完备的 优先找到最浅的目标节点 但最浅不一定最优 如果路径耗散是节点深度的非递减函数，BFS才是最优的例如单步耗散相等的情况 内存的需求是比执行时间的消耗更大的问题  代价一致搜索UCS特点 扩展路径消耗最低的节点 扩展到一个具有能返回同一状态的零耗散行动的节点时会陷入无限循环  深度优先搜索DFS特点 对内存需求很少，只存储一条从根节点到叶节点的路径，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-05T02:14:05.000Z">
-<meta property="article:modified_time" content="2021-09-29T05:34:09.306Z">
+<meta property="article:modified_time" content="2021-10-07T08:57:24.152Z">
 <meta property="article:author" content="Shea Hench">
 <meta property="article:tag" content="agent">
 <meta property="article:tag" content="algorithm">
@@ -39,10 +39,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/09/05/several-search-methods/","path":"2021/09/05/several-search-methods/","title":"several_search_methods"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/09/05/several-search-methods/","path":"2021/09/05/several-search-methods/","title":"several search methods"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>several_search_methods | Shea's Blog</title>
+<title>several search methods | Shea's Blog</title>
   
 
 
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2/%E7%9B%B2%E7%9B%AE%E6%90%9C%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text"> 无信息搜索&#x2F;盲目搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2BFS"><span class="nav-number">1.1.</span> <span class="nav-text"> 广度优先搜索BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E4%B8%80%E8%87%B4%E6%90%9C%E7%B4%A2UCS"><span class="nav-number">1.2.</span> <span class="nav-text"> 代价一致搜索UCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9-2"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2DFS"><span class="nav-number">1.3.</span> <span class="nav-text"> 深度优先搜索DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9-3"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 特点</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2-%E7%9B%B2%E7%9B%AE%E6%90%9C%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text">无信息搜索&#x2F;盲目搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2BFS"><span class="nav-number">1.1.</span> <span class="nav-text">广度优先搜索BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E4%B8%80%E8%87%B4%E6%90%9C%E7%B4%A2UCS"><span class="nav-number">1.2.</span> <span class="nav-text">代价一致搜索UCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2DFS"><span class="nav-number">1.3.</span> <span class="nav-text">深度优先搜索DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">特点</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +194,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          several_search_methods
+          several search methods
         </h1>
 
         <div class="post-meta-container">
@@ -212,7 +212,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-29 13:34:09" itemprop="dateModified" datetime="2021-09-29T13:34:09+08:00">2021-09-29</time>
+        <time title="Modified: 2021-10-07 16:57:24" itemprop="dateModified" datetime="2021-10-07T16:57:24+08:00">2021-10-07</time>
       </span>
 
   
@@ -225,29 +225,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="无信息搜索/盲目搜索"><a class="header-anchor" href="#无信息搜索/盲目搜索">¶</a> 无信息搜索/盲目搜索</h1>
-<h2 id="广度优先搜索BFS"><a class="header-anchor" href="#广度优先搜索BFS">¶</a> 广度优先搜索BFS</h2>
-<h3 id="特点"><a class="header-anchor" href="#特点">¶</a> 特点</h3>
-<ol>
+        <h1 id="无信息搜索-盲目搜索"><a title="无信息搜索/盲目搜索" class="headerlink" href="#无信息搜索-盲目搜索"></a>无信息搜索/盲目搜索</h1><h2 id="广度优先搜索BFS"><a title="广度优先搜索BFS" class="headerlink" href="#广度优先搜索BFS"></a>广度优先搜索BFS</h2><h3 id="特点"><a title="特点" class="headerlink" href="#特点"></a>特点</h3><ol>
 <li>完备的 优先找到最浅的目标节点 但最浅不一定最优</li>
-<li>如果路径耗散是节点深度的<strong>非递减</strong>函数，BFS才是最优的<br>
-<code>例如单步耗散相等的情况</code></li>
+<li>如果路径耗散是节点深度的<strong>非递减</strong>函数，BFS才是最优的<br><code>例如单步耗散相等的情况</code></li>
 <li>内存的需求是比执行时间的消耗更大的问题</li>
 </ol>
-<h2 id="代价一致搜索UCS"><a class="header-anchor" href="#代价一致搜索UCS">¶</a> 代价一致搜索UCS</h2>
-<h3 id="特点-2"><a class="header-anchor" href="#特点-2">¶</a> 特点</h3>
-<ol>
+<h2 id="代价一致搜索UCS"><a title="代价一致搜索UCS" class="headerlink" href="#代价一致搜索UCS"></a>代价一致搜索UCS</h2><h3 id="特点-1"><a title="特点" class="headerlink" href="#特点-1"></a>特点</h3><ol>
 <li>扩展路径消耗最低的节点</li>
 <li>扩展到一个具有能返回同一状态的零耗散行动的节点时会陷入无限循环</li>
 </ol>
-<h2 id="深度优先搜索DFS"><a class="header-anchor" href="#深度优先搜索DFS">¶</a> 深度优先搜索DFS</h2>
-<h3 id="特点-3"><a class="header-anchor" href="#特点-3">¶</a> 特点</h3>
-<ol>
+<h2 id="深度优先搜索DFS"><a title="深度优先搜索DFS" class="headerlink" href="#深度优先搜索DFS"></a>深度优先搜索DFS</h2><h3 id="特点-2"><a title="特点" class="headerlink" href="#特点-2"></a>特点</h3><ol>
 <li>对内存需求很少，只存储一条从根节点到叶节点的路径，以及该路径上每个节点的所有未被扩展的兄弟节点</li>
 <li>另一种变形<strong>回溯搜索</strong>所用内存更少，每次只产生一个后继节点</li>
 <li>有可能错误地选择一条分支一直走下去</li>
 </ol>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
     </div>
 
     
