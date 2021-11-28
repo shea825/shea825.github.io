@@ -20,27 +20,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shea825.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Hello">
+<meta name="description" content="网络应用程序常见的两种设计模式 C&#x2F;S模式 客户机位于目标主机可以保证性能，将数据缓存客户端本地从而提高数据传输效率 采用协议相对灵活 客户端和服务器都需要自己设计，开发量大 对用户主机的安全性构成威胁   B&#x2F;S模式 没有独立的客户端，使用标准浏览器作为客户端，开发量小 移植性非常好，不受平台限制 只能选择http和https协议    SOCKET 传统的进程间通信借助内核提供的IPC机制进行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://shea825.github.io/2021/08/26/hello-world/index.html">
+<meta property="og:title" content="socket">
+<meta property="og:url" content="https://shea825.github.io/2021/11/28/socket/index.html">
 <meta property="og:site_name" content="Shea&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Hello">
+<meta property="og:description" content="网络应用程序常见的两种设计模式 C&#x2F;S模式 客户机位于目标主机可以保证性能，将数据缓存客户端本地从而提高数据传输效率 采用协议相对灵活 客户端和服务器都需要自己设计，开发量大 对用户主机的安全性构成威胁   B&#x2F;S模式 没有独立的客户端，使用标准浏览器作为客户端，开发量小 移植性非常好，不受平台限制 只能选择http和https协议    SOCKET 传统的进程间通信借助内核提供的IPC机制进行">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-26T08:27:25.906Z">
-<meta property="article:modified_time" content="2021-08-26T10:18:26.180Z">
+<meta property="article:published_time" content="2021-11-28T08:16:21.000Z">
+<meta property="article:modified_time" content="2021-11-28T08:29:53.635Z">
 <meta property="article:author" content="Shea Hench">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="API">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://shea825.github.io/2021/08/26/hello-world/">
+<link rel="canonical" href="https://shea825.github.io/2021/11/28/socket/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/08/26/hello-world/","path":"2021/08/26/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://shea825.github.io/2021/11/28/socket/","path":"2021/11/28/socket/","title":"socket"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Shea's Blog</title>
+<title>socket | Shea's Blog</title>
   
 
 
@@ -119,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hello Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">2.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">2.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">2.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">2.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">2.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">网络应用程序常见的两种设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOCKET"><span class="nav-number">2.</span> <span class="nav-text">SOCKET</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -179,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/08/26/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://shea825.github.io/2021/11/28/socket/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          socket
         </h1>
 
         <div class="post-meta-container">
@@ -204,7 +207,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-08-26 16:27:25 / Modified: 18:18:26" itemprop="dateCreated datePublished" datetime="2021-08-26T16:27:25+08:00">2021-08-26</time>
+      <time title="Created: 2021-11-28 16:16:21 / Modified: 16:29:53" itemprop="dateCreated datePublished" datetime="2021-11-28T16:16:21+08:00">2021-11-28</time>
     </span>
 
   
@@ -217,19 +220,57 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Hello-Hexo"><a title="Hello Hexo" class="headerlink" href="#Hello-Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a title="Quick Start" class="headerlink" href="#Quick-Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a title="Create a new post" class="headerlink" href="#Create-a-new-post"></a>Create a new post</h3>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a title="Run server" class="headerlink" href="#Run-server"></a>Run server</h3>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a title="Generate static files" class="headerlink" href="#Generate-static-files"></a>Generate static files</h3>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a title="Deploy to remote sites" class="headerlink" href="#Deploy-to-remote-sites"></a>Deploy to remote sites</h3>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h2 id="网络应用程序常见的两种设计模式"><a title="网络应用程序常见的两种设计模式" class="headerlink" href="#网络应用程序常见的两种设计模式"></a>网络应用程序常见的两种设计模式</h2><ul>
+<li><code>C/S</code>模式<ul>
+<li>客户机位于目标主机可以保证性能，将数据缓存客户端本地从而提高数据传输效率</li>
+<li>采用协议相对灵活</li>
+<li>客户端和服务器都需要自己设计，开发量大</li>
+<li>对用户主机的安全性构成威胁</li>
+</ul>
+</li>
+<li><code>B/S</code>模式<ul>
+<li>没有独立的客户端，使用标准浏览器作为客户端，开发量小</li>
+<li>移植性非常好，不受平台限制</li>
+<li>只能选择<code>http</code>和<code>https</code>协议</li>
+</ul>
+</li>
+</ul>
+<h2 id="SOCKET"><a title="SOCKET" class="headerlink" href="#SOCKET"></a><code>SOCKET</code></h2><blockquote>
+<p>传统的进程间通信借助内核提供的<code>IPC</code>机制进行，但是仅限于本机通信；若要跨机通信，则必须使用网络通信（本质上借助内核提供的<code>SOCKET</code>伪文件机制实现通信，实际上是使用文件描述符）</p>
+</blockquote>
+<ul>
+<li>网络字节序：大端字节序<ul>
+<li>大小端概念<ul>
+<li>大端：低位地址存放高位数据</li>
+<li>小端：低位地址存放低位数据</li>
+</ul>
+</li>
+<li>大小端使用场景：<br>  大端和小端是对数据类型长度是两个及以上的数据而言，如<code>int</code>和<code>short</code>，对单字节没限制，在网络中经常需要考虑大小端的是<code>IP</code>和<code>PORT</code></li>
+<li>大小端转换</li>
+<li><code>IP</code>地址转换函数
+</li>
+<li><code>sockaddr</code>结构体
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>主要<code>API</code>函数<ul>
+<li><code>socket</code>：创建<code>socket</code></li>
+<li><code>bind</code>：将<code>socket</code>文件描述符和<code>IP</code>、<code>PORT</code>绑定</li>
+<li><code>listen</code>：将套接字由主动态变为被动态</li>
+<li><code>accept</code>：获得一个连接，若当前没有连接则会阻塞等待</li>
+<li><code>connect</code>：连接服务器 </li>
+<li>读取数据和发送数据</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>服务端</li>
+<li>客户端</li>
+<li>交互</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -238,15 +279,23 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/API/" rel="tag"># API</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/10/08/gitlab-CI-CD/" rel="prev" title="gitlab CI/CD">
+                  <i class="fa fa-chevron-left"></i> gitlab CI/CD
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/08/26/GAMA%E5%85%A5%E9%97%A8%E5%B0%8F%E7%BB%93/" rel="next" title="GAMA入门小结">
-                  GAMA入门小结 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/11/28/docker/" rel="next" title="docker">
+                  docker <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
